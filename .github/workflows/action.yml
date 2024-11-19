@@ -7,13 +7,13 @@ jobs:
   issue_comment:
     runs-on: ubuntu-latest
     steps:
-      - name: create comment
-        run: echo "${{ github.event.issue.number }}"
+      - name: add issue number
+        run: echo "${{ toJSON(github.event) }}"
   
       - name: create comment
         uses: peter-evans/create-or-update-comment@v4
         with:
-          issue-number: 1
+          issue-number: "${{ github.event.issue.number }}"
           body: |
             This is a multi-line test comment
             - With GitHub **Markdown** :sparkles:
